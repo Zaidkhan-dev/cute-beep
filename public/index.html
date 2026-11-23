@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd5dc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="₍ᐢ. ̫ .ᐢ₎">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" href="/assets/icon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon-192.png">
+  <title>₍ᐢ. ̫ .ᐢ₎</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Ambient Sparkle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <main class="toy-container">
+    <!-- Kids Toy Shell -->
+    <div class="toy-console">
+      <!-- Toy Top Screws & Cute Antenna / Ear bumps -->
+      <div class="toy-ears">
+        <div class="toy-ear toy-ear-left"></div>
+        <div class="toy-top-handle"></div>
+        <div class="toy-ear toy-ear-right"></div>
+      </div>
+
+      <!-- Top Header: Character Badges & Toy Status Jewels -->
+      <header class="toy-header">
+        <!-- Bat Kitten Badge -->
+        <button id="role-bat" class="character-badge active" aria-label="Bat Kitten">
+          <div class="badge-halo"></div>
+          <div class="badge-avatar-wrap">
+            <img src="/assets/bat-cat.jpg" alt="" class="badge-img" draggable="false">
+            <span class="bat-emblem">🦇</span>
+          </div>
+          <div class="active-indicator"></div>
+        </button>
+
+        <!-- Center Toy Charm / LED Jewels -->
+        <div class="toy-center-charm">
+          <button id="secret-pair-btn" class="charm-gem" aria-label="Pair">
+            <span class="gem-heart">♥</span>
+          </button>
+          <div class="toy-led" id="connection-led"></div>
+        </div>
+
+        <!-- Kitty Kitten Badge -->
+        <button id="role-kitty" class="character-badge" aria-label="Bow Kitten">
+          <div class="badge-halo"></div>
+          <div class="badge-avatar-wrap">
+            <img src="/assets/kitty-cat.jpg" alt="" class="badge-img" draggable="false">
+            <span class="bow-emblem">🎀</span>
+          </div>
+          <div class="active-indicator"></div>
+        </button>
+      </header>
+
+      <!-- Center Stage: The Giant Kids Toy Push Button -->
+      <section class="toy-screen-stage">
+        <!-- Soundwave Aura Rings -->
+        <div class="aura-rings" id="aura-rings">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+        </div>
+
+        <!-- Huge Central Interactive Toy Button -->
+        <div class="button-housing">
+          <button id="big-beep-btn" class="big-toy-button" aria-label="Button">
+            <div class="button-lip"></div>
+            <div class="button-surface">
+              <div class="button-gloss"></div>
+              <div class="button-symbol" id="button-symbol">
+                <div class="symbol-paw">🐾</div>
+                <div class="symbol-sparkle">✨</div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Floating reaction bubble (pops up on beep) -->
+        <div id="reaction-bubble" class="reaction-bubble">
+          <span class="bubble-cat" id="bubble-cat">₍ᐢ. ̫ .ᐢ₎</span>
+          <span class="bubble-notes">♪ ♫ ♪</span>
+        </div>
+      </section>
+
+      <!-- Bottom Toy Footer: Sound Toggle & Tactile Toy Accents -->
+      <footer class="toy-footer">
+        <button id="sound-btn" class="toy-mini-btn" aria-label="Sound">
+          <span id="sound-icon">🔔</span>
+        </button>
+
+        <div class="toy-speaker-grille">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <button id="install-btn" class="toy-mini-btn" aria-label="Install">
+          <span id="install-icon">📲</span>
+        </button>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Discreet Pair Keypad Modal (No explanation, just 4 cute color gems) -->
+  <div id="pair-modal" class="pair-modal hidden">
+    <div class="modal-card">
+      <div class="modal-cute-header">
+        <span>🐾</span>
+        <button id="close-modal-btn" class="modal-close-btn">✕</button>
+      </div>
+      <div class="code-display" id="code-display">••••</div>
+      <div class="cute-keypad">
+        <button class="key-btn" data-val="1">🌸</button>
+        <button class="key-btn" data-val="2">⭐</button>
+        <button class="key-btn" data-val="3">🎀</button>
+        <button class="key-btn" data-val="4">🦇</button>
+        <button class="key-btn" data-val="5">🐾</button>
+        <button class="key-btn" data-val="6">🍓</button>
+        <button class="key-btn" data-val="7">🌙</button>
+        <button class="key-btn" data-val="8">🍭</button>
+        <button class="key-btn" data-val="9">🧁</button>
+        <button class="key-btn key-clear" data-val="C">↺</button>
+        <button class="key-btn" data-val="0">💖</button>
+        <button class="key-btn key-ok" data-val="OK">✓</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-beep" src="/assets/beep.wav" preload="auto"></audio>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+{
+  "appId": "com.cutebeep.toy",
+  "appName": "₍ᐢ. ̫ .ᐢ₎",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "android": {
+    "backgroundColor": "#ffd5dc",
+    "allowMixedContent": true
+  }
+}
+
