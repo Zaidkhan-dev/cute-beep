@@ -25,7 +25,7 @@ jobs:
       - name: Accept Android SDK Licenses & Install Platforms
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "platforms;android-35" || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "platforms;android-35" "platforms;android-36" || true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,24 +42,25 @@ jobs:
         working-directory: android
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace > build.log 2>&1 || (echo "### Gradle Build Error Log" >> $GITHUB_STEP_SUMMARY && echo '```' >> $GITHUB_STEP_SUMMARY && tail -n 120 build.log >> $GITHUB_STEP_SUMMARY && echo '```' >> $GITHUB_STEP_SUMMARY && cat build.log && exit 1)
 
-      - name: Locate APK file
+      - name: Prepare APK file
         run: |
           find . -name "*.apk" -type f
+          mkdir -p release-pkg
+          cp $(find android/app/build/outputs/apk/debug/ -name "*.apk" | head -n 1) ./cute-beep.apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: cute-beep-app
-          path: "**/*.apk"
+          path: ./cute-beep.apk
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: github.ref == 'refs/heads/main'
         with:
-          tag_name: v1.0.1
-          name: "Cute Beep APK v1.0.1"
-          body: "The cute kids toy beep app APK! Download and install on both Android phones."
-          files: |
-            android/app/build/outputs/apk/debug/*.apk
+          tag_name: v1.0.2
+          name: "Cute Beep APK v1.0.2"
+          body: "The cute kids toy beep app APK! Download cute-beep.apk directly and install on both Android phones."
+          files: ./cute-beep.apk
